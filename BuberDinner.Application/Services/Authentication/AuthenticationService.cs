@@ -1,4 +1,5 @@
-﻿using BuberDinner.Application.Common.Interfaces.Authentication;
+﻿using BuberDinner.Application.Common.Common.Errors;
+using BuberDinner.Application.Common.Interfaces.Authentication;
 using BuberDinner.Application.Common.Interfaces.Persistence;
 using BuberDinner.Domain.Entities;
 
@@ -17,7 +18,7 @@ public class AuthenticationService : IAuthenticationService
     public async Task<AuthenticationResult> Login(string email, string password)
     {
         if(await _userRepository.GetUserByEmail(email) is not User user) 
-            throw new Exception("User with giver email already exixts!");
+            throw new DuplicateEmailExists();
 
         if(user.Password != password)
             throw new Exception("Invalid Password");
