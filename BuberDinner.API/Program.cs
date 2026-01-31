@@ -14,6 +14,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
     //Add Controllers and Swagger
     // builder.Services.AddControllers(options => options.Filters.Add<ErrorHandlingFilterAttributes>());
     builder.Services.AddControllers();
+    builder.Services.AddHealthChecks();
 
     builder.Services.AddSingleton<ProblemDetailsFactory, BuderDinnerProblemDetailsFactory>();
     builder.Services.AddEndpointsApiExplorer();
